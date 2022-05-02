@@ -1,0 +1,45 @@
+.ui-widget.success-dialog {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: .8em;
+ 
+}
+
+.ui-widget-content.success-dialog {
+    background: #F9F9F9;
+    border: 1px solid #d18b09;
+    color: #222222;
+    font-size: 15px;
+    margin: 0 auto;
+    padding:0;
+    
+}
+
+.ui-dialog.success-dialog {
+    margin: 300px;
+    left: 300px;
+    position: absolute;
+   
+}
+
+.ui-dialog.success-dialog .ui-dialog-content {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    overflow: auto;
+}
+
+.ui-dialog.success-dialog .ui-widget-header {
+    background: #f3cf03;
+    border: 0;
+    color: #fff;
+    font-weight: bold;
+}
+
+.ui-dialog.success-dialog .ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+    font-size: 15px;
+}
+
+#enviado{
+    cursor: pointer;
+}
