@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\MercadoLivre;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +11,7 @@ abstract class FactoryShopee
 {
     public abstract function CadastraBancoMercadoLivre($apikey);
     public abstract function GravaMercadoLivreProduro($referencia,$preco,$MercadoLivreID,$thumbnail,$Peso,$descricao,$largura,$altura,$comprimento);
+    public abstract function FilaAssincrona();
 }
 
 class AnaliseDeDadosFactory extends FactoryShopee
@@ -97,4 +97,12 @@ class AnaliseDeDadosFactory extends FactoryShopee
             }
         }
     }
+
+    public function FilaAssincrona(){
+        $produtos = TrayProduct::where('FlagMercadoLivre','X')->get();
+        foreach ($produtos as $produto) {
+            
+        }
+    }
+
 }

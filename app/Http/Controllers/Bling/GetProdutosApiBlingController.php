@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bling;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\getShopeeId;
 use App\Models\TrayProduct;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class GetProdutosApiBlingController extends Controller
 
     public function resource()
     {
-        return $this->get('produtos/page=70/json/');
+        return $this->get('produtos/page=69/json/');
     }
 
     public function get($resource)
@@ -32,29 +33,30 @@ class GetProdutosApiBlingController extends Controller
         $endpoint = URL_BASE_API_GET_PRODUTOS_BLING . $resource;
         echo $endpoint;
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $endpoint . '&apikey=' . $this->getApiKey() . '&estoque=S');
+        curl_setopt($ch, CURLOPT_URL, $endpoint . '&apikey=' . $this->getApiKey() . '&loja=203664307');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
         $produtos = json_decode($response, false);
-
+        echo "<pre>";
         foreach ($produtos as $produto) {
             foreach ($produto as $valores) {
 
                 foreach ($valores as $valor) {
 
-                    if($valor->produto->codigo){
-                        $codigo = $valor->produto->codigo;
-                        $largura = $valor->produto->larguraProduto;
-                        $altura = $valor->produto->alturaProduto;
-                        $comprimento = $valor->produto->profundidadeProduto;
-                        $produto = TrayProduct::where('referencia', $codigo)->update(['largura' => $largura, 'altura' => $altura, 'comprimento' => $comprimento]);
-                        if ($produto == 1) {
-                            echo "PRODUTO: $codigo | LARGURA $largura | ALTURA $altura | COMPRIMENTO $comprimento GRAVADO COM SUCESSO <hr>";
+                    if ($valor->produto->codigo) {
+                        $shopeeData = isset($valor->produto->produtoLoja) ? $valor->produto->produtoLoja : "";
+                        if ($shopeeData) {
+                            $codigo = $valor->produto->codigo;
+                            // $largura = $valor->produto->larguraProduto;
+                            // $altura = $valor->produto->alturaProduto;
+                            // $comprimento = $valor->produto->profundidadeProduto;
+                            // INICIA O JOB E JOGA NA FILA DE REQUISICAO
+                            echo $shopeeData->idProdutoLoja . "<br>";
+                             \App\Jobs\getShopeeId::dispatch($codigo,$shopeeData->idProdutoLoja)->delay(now()->addSeconds(2));
                         }
                     }
-                    
                 }
             }
         }

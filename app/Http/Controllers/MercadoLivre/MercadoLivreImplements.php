@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\MercadoLivre;
-
 use App\Http\Controllers\Controller;
 use DateTime;
 use Illuminate\Http\Request;

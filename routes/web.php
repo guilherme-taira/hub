@@ -8,6 +8,7 @@ use App\Http\Controllers\MercadoLivre\Auth;
 use App\Http\Controllers\MercadoLivre\HubLiveController;
 use App\Http\Controllers\MercadoLivre\MercadoLivreController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Shopee\ShopeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UelloController;
 
@@ -30,6 +31,8 @@ Route::get('/HubMercadoLivre',[HubLiveController::class,'AtivarHub'])->name('hub
 
 Route::get('getimageajax',[AjaxGetProdutoController::class,'ajaxGetProduto'])->name('ajaximage');
 
+Route::get('/MercadolivreAuth', [Auth::class,'redirectAuth'])->name('Mercadolivre');
+
 Route::post('posthubactive',[AjaxPostActiveHubController::class,'AtivaHub'])->name('ativahubpost');
 
 Route::resource('produtos','App\Http\Controllers\ProductController')->names('product');
@@ -48,6 +51,8 @@ Route::resource('MercadoLivre', 'App\Http\Controllers\MercadoLivre\MercadoLivreC
 
 Route::resource('Categories','App\Http\Controllers\MercadoLivre\CategoriasController')->parameters(["Categories" => "id"]);
 
-Route::get('/MercadolivreAuth', [Auth::class,'redirectAuth'])->name('Mercadolivre');
+Route::resource('Shopee','App\Http\Controllers\Shopee\ShopeeController')->names('Shopee');
+
+
 
 

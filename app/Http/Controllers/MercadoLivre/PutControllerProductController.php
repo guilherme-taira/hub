@@ -43,12 +43,12 @@ class PutControllerProductController extends Controller
         if($this->getPrice() < 79){
             $arrayDados = array(
                 "price" => $this->getPrice(),
-                "available_quantity" => $this->getStock(),
+                "available_quantity" => intval($this->getStock()),
                 "status" => $this->getStatus(),
                 "shipping" => array(
                     "mode" => "not_specified",
                     "free_shipping" => "false",
-                ),
+                )
             );
         }else{
             $arrayDados = array(
@@ -57,7 +57,7 @@ class PutControllerProductController extends Controller
                 "status" => $this->getStatus(),
             );
         }
-
+        
         // CONVERTE O ARRAY PARA JSON
         $data_json = json_encode($arrayDados);
         
@@ -70,8 +70,11 @@ class PutControllerProductController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json','Accept: application/json',"Authorization: Bearer {$this->get_tokenAcess()}"]);
         $reponse = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         $json = json_decode($reponse);
+
+        //echo $httpCode . "<br>";
     }
 
     /**

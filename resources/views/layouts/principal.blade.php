@@ -47,6 +47,7 @@
             <li class="sidebar-nav-item"><a href="{{ route('Uello.index') }}">Uello  &nbsp; <img src="{{asset('assets/img/logos/uello.jpg')}}" style="width: 24px; height: 24px;"></a></li>
             <li class="sidebar-nav-item"><a href="{{ route('Pedidos.index') }}">Pedidos Bling  &nbsp; <img src="{{asset('assets/img/logos/bling.svg')}}" style="width: 24px; height: 24px;"></a></li>
             <li class="sidebar-nav-item"><a href="{{ route('brindes.index') }}">Brinde <img src="{{asset('assets/img/logos/gift.svg')}}" style="width: 24px; height: 24px;"></a></li>
+            <li class="sidebar-nav-item"><a href="{{ route('Shopee.index')}}">Shopee</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Mercado Livre &nbsp; <img src="{{asset('assets/img/logos/mercadolivre.svg')}}" style="width: 24px; height: 24px;"></a>
